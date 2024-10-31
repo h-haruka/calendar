@@ -1,6 +1,6 @@
-/*=======================================
+/*==============================
 グローバル変数
-=======================================*/
+==============================*/
 
 // 表示中の年月
 const currentDate: Date = new Date();
@@ -13,9 +13,9 @@ const elmNext: HTMLElement = document.querySelector(".cal__next")!;
 // 日付表示部
 const elmDays: HTMLElement = document.querySelector(".cal__days")!;
 
-/*=======================================
+/*==============================
 イベントハンドラ
-=======================================*/
+==============================*/
 
 // アプリケーション初期化
 const onPageLoad = (): void => {
@@ -38,9 +38,10 @@ const onNext = (): void => {
   // 描画更新
   updateView(currentDate);
 };
-/*=======================================
+
+/*==============================
 イベントリスナー
-=======================================*/
+==============================*/
 
 // ページの読み込み完了イベント
 window.addEventListener("load", onPageLoad);
@@ -50,9 +51,10 @@ elmPrev.addEventListener("click", onPrev);
 
 // 翌月移動ナビのクリックイベント
 elmNext.addEventListener("click", onNext);
-/*=======================================
+
+/*==============================
 ユーザー定義関数
-=======================================*/
+==============================*/
 
 // 描画更新
 function updateView(date: Date): void {
@@ -72,18 +74,18 @@ function updateTitle(date: Date): void {
 
   // 日付表示部の更新
   function updateDays(date: Date): void {
-    // -----------------
+    // ------------------------------------
     // 配列を宣言
-    // -----------------
+    // ------------------------------------
 
     // セルの日付を格納する配列
     const dateList: number[] = [];
-    // セルのクラス名を格納する配列
+    // セルのclass名を格納する配列
     const classList: string[] = [];
 
-    // ------------------
+    // -------------------------------------
     // 日付の表示に必要な情報を求める
-    // ------------------
+    // -------------------------------------
 
     // 当月の日数を求める
     const thisDays: number = getMonthDays(date);
@@ -94,9 +96,9 @@ function updateTitle(date: Date): void {
     // 当月の表示に必要な行数を求める
     const rows: number = Math.ceil((thisDays + prevDays) / 7);
 
-    // --------------------------
+    // ---------------------------------------------
     // セルのデータを配列に格納する
-    // --------------------------
+    // ---------------------------------------------
 
     // セルの個数だけ繰り返す
     for (let i: number = 0; i < rows * 7; i++) {
@@ -150,7 +152,7 @@ function updateTitle(date: Date): void {
         html += "<tr>";
       }
       // i番目のセルのHTMLを連結
-      html += '<td class="' + classList.shift() + '">' + dateList.shift()?.toString() + " </td>";
+      html += '<td class="' + classList.shift() + '">' + dateList.shift()?.toString() + "</td>";
       // i番目のセルが7列目の場合
       if (i % 7 === 6) {
         // tr終了タグを連結
@@ -175,10 +177,10 @@ function updateTitle(date: Date): void {
       return days;
     }
 
-    function getFirstDayOfWeek(date: Date): number {
+    // 当月の1日の曜日を求める関数
+function getFirstDayOfWeek(date: Date): number {
       // 1日の日付オブジェクトを生成
-      const firstDay: Date = new Date(
-        date.getFullYear(), date.getMonth(),1);
+      const firstDay: Date = new Date(date.getFullYear(), date.getMonth(), 1);
       // 1日の曜日を取得
       const day: number = firstDay.getDay();
       // 曜日を返す
@@ -187,8 +189,7 @@ function updateTitle(date: Date): void {
 
     function getPrevMonthDays(date: Date): number {
       // 前月の日付オブジェクトを生成
-      const prevMonth: Date = new Date(
-        date.getFullYear(), date.getMonth() - 1);
+      const prevMonth: Date = new Date(date.getFullYear(), date.getMonth() - 1);
       // 前月の日数を取得
       const days: number = getMonthDays(prevMonth);
       // 前月の日数を返す
